@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FacultyNewspaper name="Факультет інформаційних технологій" lastUpdated="2025-11-15">
+  
+  <Entry id="entry-001" type="Article">
+    <Title>Нова ера вступної кампанії 2026</Title>
+    <Annotation>
+      Детальний аналіз нових правил прийому та поради абітурієнтам 
+      від приймальної комісії.
+    </Annotation>
+    <PublicationDate>2025-11-14</PublicationDate>
+    <Category>Офіційно</Category>
+    <Author>
+      <Name>Петренко Василь Семенович</Name>
+      <Position>Голова приймальної комісії</Position>
+    </Author>
+    <Reviews>
+      <Review reader="student_future@mail.com" score="5">
+        Дуже вдячний за чітке пояснення!
+      </Review>
+      <Review reader="anonymous_user" score="4">
+        Чекаємо на день відкритих дверей.
+      </Review>
+    </Reviews>
+  </Entry>
+  
+  <Entry id="entry-002" type="Graphic" department="Кафедра дизайну">
+    <Title>Фотозвіт: Конкурс 'CyberDesign 2025'</Title>
+    <Annotation>
+      Найкращі роботи студентів 3-го курсу кафедри дизайну. 
+      Переможці та призери.
+    </Annotation>
+    <Author>
+      <Name>Іваненко Ольга</Name>
+      <Position>Студентський медіа-центр</Position>
+    </Author>
+    <FileLocation format="JPEG" resolution="1920x1080">
+      /gallery/cyberdesign_2025/main.jpg
+    </FileLocation>
+    </Entry>
+
+  <Entry id="entry-003" type="Article" department="Кафедра ШІ" isFeatured="true">
+    <Title>Прорив у нейромережах: Нова архітектура 'Phoenix'</Title>
+    <Annotation>
+      Наша команда розробила нову архітектуру, що показує SOTA 
+      результати на задачах NLP.
+    </Annotation>
+    <PublicationDate>2025-11-10</PublicationDate>
+    <Category>Наука</Category>
+    <Author>
+      <Name>Ковальчук Андрій Вікторович</Name>
+      <Position>Професор, д.т.н.</Position>
+    </Author>
+    <Author>
+      <Name>Сидоренко Ігор</Name>
+      <Position>Аспірант</Position>
+    </Author>
+    <Reviews>
+      <Review reader="ai_enthusiast@gmail.com" score="5">
+        Неймовірна робота! Коли буде код на GitHub?
+      </Review>
+    </Reviews>
+  </Entry>
+  
+  <Entry id="entry-004" type="Announcement" department="Деканат" isFeatured="false" audience="all_students">
+    <Title>Зміни в розкладі сесії</Title>
+    <Annotation>
+      Увага! У зв'язку з технічними роботами, іспит з "Баз даних" 
+      переноситься з 20.12 на 22.12.
+    </Annotation>
+    <PublicationDate>2025-11-15</PublicationDate>
+    <Category>Оголошення</Category>
+    <Author>
+      <Name>Методичний відділ</Name>
+      <Position>Деканат</Position>
+    </Author>
+    </Entry>
+
+</FacultyNewspaper>
