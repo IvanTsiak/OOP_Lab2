@@ -15,10 +15,10 @@
     </Author>
     <Reviews>
       <Review reader="student_future@mail.com" score="5">
-        Дуже вдячний за чітке пояснення!
+        Вступна кампанія? Що це?
       </Review>
       <Review reader="anonymous_user" score="4">
-        Чекаємо на день відкритих дверей.
+        І хто ж до вас захоче вступити?
       </Review>
     </Reviews>
   </Entry>
@@ -39,10 +39,10 @@
     </Entry>
 
   <Entry id="entry-003" type="Article" department="Кафедра ШІ" isFeatured="true">
-    <Title>Прорив у нейромережах: Нова архітектура 'Phoenix'</Title>
+    <Title>Прорив у нейромережах: хтось створив щось!</Title>
     <Annotation>
-      Наша команда розробила нову архітектуру, що показує SOTA 
-      результати на задачах NLP.
+      Наша команда (просто прекрасна, люблю нас) розробила нову архітектуру, що показує SOTA 
+      результати на задачах NLP (я не знаю, що ці абревіатурки значать).
     </Annotation>
     <PublicationDate>2025-11-10</PublicationDate>
     <Category>Наука</Category>
@@ -55,8 +55,8 @@
       <Position>Аспірант</Position>
     </Author>
     <Reviews>
-      <Review reader="ai_enthusiast@gmail.com" score="5">
-        Неймовірна робота! Коли буде код на GitHub?
+      <Review reader="sydorenko_ihor@gmail.com" score="5">
+        Люблю Сидоренка Ігоря! Він неперевершена людина!
       </Review>
     </Reviews>
   </Entry>
@@ -65,7 +65,7 @@
     <Title>Зміни в розкладі сесії</Title>
     <Annotation>
       Увага! У зв'язку з технічними роботами, іспит з "Баз даних" 
-      переноситься з 20.12 на 22.12.
+      переноситься з 20.12 на 22.02.
     </Annotation>
     <PublicationDate>2025-11-15</PublicationDate>
     <Category>Оголошення</Category>

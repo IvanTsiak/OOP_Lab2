@@ -13,7 +13,7 @@ namespace Lab2.Services.SearchStrategy
         {
             List<FacultyEntry> results = new List<FacultyEntry>();
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xmlFilePath);
+            doc.Load(xmlFilePath);
 
             XmlNodeList entryNodes = doc.SelectNodes("//Entry");
 
@@ -35,6 +35,21 @@ namespace Lab2.Services.SearchStrategy
                     {
                         entry.Authors.Add(authorNode.InnerText);
                     }
+
+                    XmlNodeList reviewNodes = entryNode.SelectNodes("Reviews/Review");
+                    if (reviewNodes != null)
+                    {
+                        foreach (XmlNode rNode in reviewNodes)
+                        {
+                            entry.Reviews.Add(new Review
+                            {
+                                User = rNode.Attributes["reader"]?.Value,
+                                Score = rNode.Attributes["score"]?.Value,
+                                Comment = rNode.InnerText.Trim()
+                            });
+                        }
+                    }
+
                     results.Add(entry);
                 }
             }

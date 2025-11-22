@@ -26,7 +26,16 @@ namespace Lab2.Services.SearchStrategy
                             Annotation = entry.Element("Annotation")?.Value,
                             Authors = entry.Elements("Author")
                                          .Select(a => a.Element("Name")?.Value)
-                                         .ToList()
+                                         .ToList(),
+                            Reviews = entry.Element("Reviews")?
+                                           .Elements("Review")
+                                           .Select(r => new Review
+                                           {
+                                               User = r.Attribute("reader")?.Value,
+                                               Score = r.Attribute("score")?.Value,
+                                               Comment = r.Value.Trim()
+                                           })
+                                           .ToList() ?? new List<Review>()
                         };
 
             return query.ToList();

@@ -13,6 +13,7 @@ namespace Lab2.Services.SearchStrategy
         {
             List<FacultyEntry> results = new List<FacultyEntry>();
             FacultyEntry currentEntry = null;
+            Review currentReview = null;
             string currentElement = string .Empty;
 
             using (XmlReader reader = XmlReader.Create(xmlFilePath))
@@ -29,6 +30,12 @@ namespace Lab2.Services.SearchStrategy
                             currentEntry.Type = reader.GetAttribute("type");
                             currentEntry.Department = reader.GetAttribute("department");
                         }
+                        else if (currentElement == "Review" && currentEntry != null)
+                        {
+                            currentReview = new Review();
+                            currentReview.User = reader.GetAttribute("reader");
+                            currentReview.Score = reader.GetAttribute("score");
+                        }
                     }
                     else if (reader.NodeType == XmlNodeType.Text && currentEntry != null)
                     {
@@ -43,15 +50,27 @@ namespace Lab2.Services.SearchStrategy
                             case "Name":
                                 currentEntry.Authors.Add(reader.Value);
                                 break;
+                            case "Review":
+                                if (currentReview != null)
+                                {
+                                    currentReview.Comment = reader.Value.Trim();
+                                }
+                                break;
                         }
                     }
                     else if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "Entry")
                     {
-                        if (currentEntry != null && IsMatch(currentEntry, criteria))
+                        if (reader.Name == "Entry")
                         {
-                            results.Add(currentEntry);
+                            if (currentEntry != null && IsMatch(currentEntry, criteria))
+                                results.Add(currentEntry);
+                            currentEntry = null;
                         }
-                        currentEntry = null;
+                        else if (reader.Name == "Review" && currentEntry != null && currentReview != null)
+                        {
+                            currentEntry.Reviews.Add(currentReview);
+                            currentReview = null;
+                        }
                     }
                 }
             }

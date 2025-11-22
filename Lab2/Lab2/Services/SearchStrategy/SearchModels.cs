@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Lab2.Services.SearchStrategy
 {
+    public class Review
+    {
+        public string User { get; set; }
+        public string Score { get; set; }
+        public string Comment { get; set; }
+    }
     public class SearchCriteria
     {
         public string Title { get; set; }
@@ -31,9 +37,11 @@ namespace Lab2.Services.SearchStrategy
         public string Annotation { get; set; }
         public List<string> Authors { get; set; } = new List<string>();
 
+        public List<Review> Reviews { get; set; } = new List<Review>();
+        public string AuthorsDisplay => string.Join(", ", Authors);
         public override string ToString()
         {
-            return $"[{Type}] {Title} (Автори: {string.Join(", ", Authors)})";
+            return $"[{Type}] {Title}";
         }
     }
 }
