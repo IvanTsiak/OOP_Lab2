@@ -33,7 +33,10 @@
       <Name>Іваненко Ольга</Name>
       <Position>Студентський медіа-центр</Position>
     </Author>
-  </Entry>
+    <FileLocation format="JPEG" resolution="1920x1080">
+      /gallery/cyberdesign_2025/main.jpg
+    </FileLocation>
+    </Entry>
 
   <Entry id="entry-003" type="Article" department="Кафедра ШІ" isFeatured="true">
     <Title>Прорив у нейромережах: хтось створив щось!</Title>

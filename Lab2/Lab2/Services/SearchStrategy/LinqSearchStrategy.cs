@@ -14,7 +14,6 @@ namespace Lab2.Services.SearchStrategy
             List<FacultyEntry> results = new List<FacultyEntry>();
             XDocument doc = XDocument.Load(xmlFilePath);
 
-            // Використовуємо LINQ to XML
             var query = from entry in doc.Descendants("Entry")
                         where IsMatch(entry, criteria)
                         select new FacultyEntry

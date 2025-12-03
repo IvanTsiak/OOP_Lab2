@@ -50,8 +50,7 @@ namespace Lab2
             var customFileType = new FilePickerFileType(
                 new Dictionary<DevicePlatform, IEnumerable<string>>
                 {
-                    { DevicePlatform.WinUI, new[] { ".xml"} },
-                    { DevicePlatform.macOS, new[] { "xml" } }
+                    { DevicePlatform.WinUI, new[] { ".xml"} }
                 });
 
             var options = new PickOptions
@@ -125,16 +124,22 @@ namespace Lab2
 
         private async void OnTransformClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(selectedXmlPath))
+            var currentResults = ResultsListView.ItemsSource as List<FacultyEntry>;
+
+            if (currentResults == null || currentResults.Count == 0)
             {
-                await DisplayAlert("Помилка", "Спочатку оберіть XML-файл", "OK");
+                await DisplayAlert("Увага", "Спочатку виконайте пошук.", "OK");
                 return;
             }
 
             try
             {
+                string tempXmlPath = GenerateXmlFromResults(currentResults);
+
                 using var memoryStream = new MemoryStream();
-                transformationService.TransformToStream(selectedXmlPath, memoryStream);
+
+                transformationService.TransformToStream(tempXmlPath, memoryStream);
+
                 memoryStream.Position = 0;
 
                 var fileSaverResult = await FileSaver.Default.SaveAsync("report.html", memoryStream, CancellationToken.None);
@@ -150,9 +155,7 @@ namespace Lab2
                             File = new ReadOnlyFile(fileSaverResult.FilePath)
                         });
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
                 else
                 {
@@ -161,8 +164,8 @@ namespace Lab2
             }
             catch (Exception ex)
             {
-                StatusLabel.Text = $"Помилка трансформації: {ex.Message}";
-                await DisplayAlert("Помилка", $"Не вдалося зберегти файл: {ex.Message}", "OK");
+                StatusLabel.Text = $"Помилка: {ex.Message}";
+                await DisplayAlert("Помилка", $"Не вдалося зберегти: {ex.Message}", "OK");
             }
         }
 
@@ -252,6 +255,47 @@ namespace Lab2
 
         ((ListView)sender).SelectedItem = null;
         }
+
+        private string GenerateXmlFromResults(List<FacultyEntry> entries)
+        {
+            var xdoc = new XDocument(
+                new XElement("FacultyNewspaper",
+                    new XAttribute("name", "Звіт за результатами пошуку"),
+                    new XAttribute("lastUpdated", DateTime.Now.ToString("yyyy-MM-dd")),
+
+                    from entry in entries
+                    select new XElement("Entry",
+                        new XAttribute("id", entry.Id ?? ""),
+                        new XAttribute("type", entry.Type ?? ""),
+                        entry.Department != null ? new XAttribute("department", entry.Department) : null,
+
+                        new XElement("Title", entry.Title),
+                        new XElement("Annotation", entry.Annotation),
+
+                        from author in entry.Authors
+                        select new XElement("Author",
+                            new XElement("Name", author)
+                        ),
+
+                        entry.Reviews != null && entry.Reviews.Any() ?
+                        new XElement("Reviews",
+                            from review in entry.Reviews
+                            select new XElement("Review",
+                                new XAttribute("reader", review.User ?? "Anon"),
+                                new XAttribute("score", review.Score ?? "0"),
+                                review.Comment
+                            )
+                        ) : null
+                    )
+                )
+            );
+
+            string tempPath = Path.Combine(FileSystem.CacheDirectory, "filtered_temp.xml");
+            xdoc.Save(tempPath);
+
+            return tempPath;
+        }
+
         public async void OnRRClicked(object sender, EventArgs e)
         {
             try

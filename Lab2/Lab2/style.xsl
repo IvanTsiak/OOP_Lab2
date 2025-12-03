@@ -24,12 +24,10 @@
 
         <table>
           <tr>
-            <th>ID</th>
             <th>Тип</th>
             <th>Назва</th>
             <th>Анотація</th>
             <th>Автори</th>
-            <th>Файли</th>
             <th>Відгуки</th>
           </tr>
           
@@ -42,7 +40,7 @@
 
   <xsl:template match="Entry">
     <tr>
-      <td><xsl:value-of select="@id"/></td>
+
       <td>
         <xsl:value-of select="@type"/>
         <xsl:if test="@department">
@@ -59,18 +57,8 @@
       <td>
         <xsl:for-each select="Author">
           <xsl:value-of select="Name"/>
-          <i> (<xsl:value-of select="Position"/>)</i>
           <br/>
         </xsl:for-each>
-      </td>
-      
-      <td>
-        <xsl:if test="FileLocation">
-          <a href="{FileLocation}">
-            <xsl:value-of select="FileLocation"/>
-          </a>
-          (<xsl:value-of select="FileLocation/@format"/>)
-        </xsl:if>
       </td>
       
       <td>
